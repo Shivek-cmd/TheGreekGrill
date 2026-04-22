@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/Chrishan Solution/BB-Restaurant Voice AI/GHL-Voice-Agent/**)"
+    ]
+  }
+}
