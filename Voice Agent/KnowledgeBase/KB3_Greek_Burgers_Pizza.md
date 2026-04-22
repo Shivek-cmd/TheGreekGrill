@@ -14,6 +14,7 @@
 - All pitas and skepasti: always ask *"Would you like tzatziki or honey mustard sauce?"*
 - All souvlaki: always ask *"Would you like pita bread or regular bread?"*
 - All pizzas are **12-inch thin crust** at **$17.95**.
+- Keep pizza answers brief during ordering: use descriptions/toppings only when the caller asks what comes on a pizza, what's in it, allergens, or dietary details.
 
 ---
 
