@@ -290,7 +290,7 @@ ${order.items.map(i => {
 
 <div class="small">
   <div><b>Type:</b> ${order.Type}</div>
-  <div><b>Instructions:</b> ${order.specialInstructions || '-'}</div>
+  ${order.specialInstructions ? `<div><b>Instructions:</b> ${order.specialInstructions}</div>` : ''}
   <div><b>Date:</b> ${order.orderDateLocal}</div>
   <div><b>Time:</b> ${order.orderTimeLocal}</div>
   <div><b>Ready By:</b> ${order.fulfillmentTimeLocal}</div>
