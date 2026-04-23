@@ -42,9 +42,7 @@ https://n8n.bizbull.ai/webhook/4dcea672-3074-4914-80fb-57e7cbbec2fe
 | 8 | `customer_phone` | String | Caller's confirmed phone number | `+16476150677` |
 | 9 | `restaurant_name` | String | Always: `The Greek Grill` | `The Greek Grill` |
 | 10 | `restaurant_address` | String | Always: `#31 99 Wye Rd, Sherwood Park, AB T8B 1M1` | `#31 99 Wye Rd, Sherwood Park, AB T8B 1M1` |
-| 11 | `order_date` | String | Date of the order in YYYY-MM-DD format | `2026-04-23` |
-<!-- TODO: param 12 order_time — add once last_call_time contact field is configured in GHL -->
-<!-- | 12 | `order_time` | String | Time the order was placed (Edmonton local time) | `1:51 PM` | -->
+<!-- NOTE: order_date and order_time are NOT sent from GHL — both generated server-side in Node 3 from Edmonton timezone -->
 | 13 | `special_requests` | String | Allergies, dietary restrictions, or special prep notes — leave empty if none | `No nuts` `Gluten-free only` |
 
 ---
@@ -101,9 +99,7 @@ return [{
       buzzerCode:      input.buzzer_code      || null,
       allergies:       input.special_requests  || null,
       requestedTime:   input.requested_time   || null,
-      orderDateLocal:  input.order_date       || null,
-      // TODO: orderTimeLocal — enable once last_call_time contact field is configured in GHL
-      // orderTimeLocal:  input.order_time       || null,
+      // orderDateLocal and orderTimeLocal are NOT read from GHL — generated in Node 3
       totalPrice:      parseFloat(totalPrice.toFixed(2))
     },
     customer: {
@@ -143,6 +139,17 @@ return [{
 const data = $input.first().json;
 const { order, customer, restaurant } = data;
 
+// Generate Edmonton local date (GHL cannot extract this from the conversation)
+const now = new Date();
+const parts = new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'America/Edmonton',
+  year: 'numeric', month: '2-digit', day: '2-digit',
+  hour: '2-digit', minute: '2-digit', hour12: true
+}).formatToParts(now);
+const get = (type) => parts.find(p => p.type === type)?.value || '';
+const orderDateLocal = `${get('year')}-${get('month')}-${get('day')}`;
+const orderTimeLocal = `${get('hour')}:${get('minute')} ${get('dayPeriod')}`;
+
 // Generate order ID from timestamp
 const orderId = Date.now();
 
@@ -162,9 +169,8 @@ return [{
         Type:                order.orderType,
         items:               order.items,
         specialInstructions: order.allergies        || null,
-        orderDateLocal:      order.orderDateLocal   || null,
-        // TODO: orderTimeLocal — enable once last_call_time contact field is configured in GHL
-        // orderTimeLocal:      order.orderTimeLocal   || null,
+        orderDateLocal,
+        orderTimeLocal,
         fulfillmentTimeLocal: order.requestedTime
       },
       id: String(orderId)
