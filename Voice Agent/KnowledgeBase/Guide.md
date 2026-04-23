@@ -13,20 +13,21 @@ KB 4 was split into two separate KBs so the agent never confuses a drink order w
 
 ---
 
-## KB 1 — Starters, Snacks & Light Bites
+## KB 1 — Starters, Snacks, Light Bites & Breakfast
 
-**Suggested GHL Name:** `GG_KB1_Starters_And_Snacks`
+**Suggested GHL Name:** `GG_KB1_Starters_Snacks_Breakfast`
 
 **Description:**
-Includes appetizers, finger foods, soups, salads, and light meals at The Greek Grill AB—ideal for starters, sharing plates, or lighter dining options before mains.
+Covers appetizers, finger foods, soups, salads, and the full breakfast menu at The Greek Grill AB — ideal for starters, sharing plates, lighter dining options, or any breakfast/brunch item.
 
 **When the Voice Agent Should Use This KB:**
 - Customer asks about appetizers, starters, or "something to share"
-- Customer mentions: wings, calamari, spring rolls, ribs, fries, bruschetta, arancini, scallops (starter), shrimp (starter), pita bombs, broccoli, brussels sprouts, garlic bread, or potato skins
+- Customer mentions: wings, calamari, spring rolls, ribs, fries, bruschetta, arancini, scallops (starter), shrimp (starter), broccoli, brussels sprouts, garlic bread, or potato skins
 - Customer asks about **soups** (daily soup menu)
 - Customer asks about **salads** (Greek salad, Caesar, beet, fennel, tuna, seafood, Thai shrimp, etc.)
+- Customer asks about **breakfast** — omelettes, eggs benedict, pancakes, crepes, French toast, avocado toast, yogurt bowl, breakfast combos
 - Customer asks about **lighter options**, **vegetarian starters**, or **vegan-friendly** dishes
-- Customer asks about allergens in starters or salads
+- Customer asks about allergens in starters, salads, or breakfast items
 
 ---
 
@@ -105,6 +106,10 @@ Covers all general restaurant information for The Greek Grill AB — hours, rese
 | "What appetizers do you have?" | KB 1 |
 | "Do you have a soup today?" | KB 1 |
 | "What salads are on the menu?" | KB 1 |
+| "Do you have a breakfast menu?" | KB 1 |
+| "Can I get eggs benedict?" | KB 1 |
+| "What pancakes do you have?" | KB 1 |
+| "Do you have avocado toast?" | KB 1 |
 | "What's your best main course?" | KB 2 |
 | "Do you have steak?" | KB 2 |
 | "Tell me about the pasta options" | KB 2 |

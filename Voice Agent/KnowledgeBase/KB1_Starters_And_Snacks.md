@@ -1,7 +1,7 @@
-# GG_KB1_Starters_And_Snacks
-> **The Greek Grill AB — Knowledge Base 1 of 4**
-> **KB Name:** GG_KB1_Starters_And_Snacks
-> **Use This KB When:** A customer asks about appetizers, starters, sharing plates, soups, or salads — anything ordered before the main course or as a lighter meal option.
+# GG_KB1_Starters_Snacks_Breakfast
+> **The Greek Grill AB — Knowledge Base 1 of 5**
+> **KB Name:** GG_KB1_Starters_Snacks_Breakfast
+> **Use This KB When:** A customer asks about appetizers, starters, sharing plates, soups, salads, or any breakfast item — anything ordered before the main course, as a lighter meal, or for breakfast/brunch.
 
 ---
 
@@ -11,6 +11,13 @@
 - For special dietary needs (gluten-free, vegan, halal), always offer to check with the kitchen.
 - Allergen info is approximate — always recommend customers inform the server of allergies.
 - If a customer asks for a recommendation, suggest the **Seared Fresh Scallops** or **Wild Argentina Red Shrimp** as premium starter highlights.
+- For **Two Eggs Any Style**: always ask *"How would you like your eggs — scrambled, fried, or poached?"*
+- For **Fruit & Nutella Pancakes**: always ask *"Which fruit — Strawberry, Banana, or Mixed Berries?"*
+- For **Buttermilk Pancakes**: mention the add-on — *"You can also add blueberries or chocolate chips for two dollars."*
+- For **Combo #3**: mention the upgrade — *"You can upgrade to a Greek Omelette with feta, tomato, and spinach for two dollars more."*
+- For **Spring Rolls**: always ask *"Vegetarian or pork filling?"*
+- For **Chicken Wings**: always ask *"Which sauce — Salt and Pepper, Hot, BBQ, or Honey Mustard?"*
+- Breakfast serving hours are not confirmed — if a caller asks when breakfast is served, say: *"I'd recommend calling us directly to confirm breakfast hours."*
 
 ---
 
@@ -268,8 +275,261 @@
 
 ---
 
+## 🍳 SECTION 4 — BREAKFAST MENU
+
+> Breakfast serving hours not confirmed — always advise caller to confirm with staff.
+> Allergens for breakfast items not fully listed — always recommend informing the server.
+
+---
+
+### CLASSIC FAVOURITES
+
+- **ITEM:** Two Eggs Any Style
+  **PRICE:** $12.99
+  **DESCRIPTION:** Two eggs cooked to your preference, with toast, hash browns, and your choice of bacon, ham, or sausages.
+  **ALLERGENS:** Eggs, Gluten (Toast), Pork (Bacon/Ham/Sausage)
+  **NOTES:** Agent must ask: *"How would you like your eggs — scrambled, fried, or poached? And which protein — bacon, ham, or sausages?"*
+
+---
+
+- **ITEM:** Bassic Bacon & Eggs
+  **PRONUNCIATION:** "Bay-sik BAY-kun and Egz"
+  **PRICE:** $14.99
+  **DESCRIPTION:** Three eggs, crispy bacon, hash browns, and toast.
+  **ALLERGENS:** Eggs, Gluten (Toast), Pork (Bacon)
+
+---
+
+- **ITEM:** Buttermilk Pancakes
+  **PRICE:** $13.99
+  **DESCRIPTION:** Three fluffy pancakes served with butter and maple syrup.
+  **ALLERGENS:** Gluten, Dairy (Butter), Eggs
+  **NOTES:** Add-on available — blueberries or chocolate chips for +$2. Mention to caller.
+
+---
+
+- **ITEM:** French Toast
+  **PRICE:** $12.99
+  **DESCRIPTION:** Thick-cut bread dipped in cinnamon batter, served with syrup and whipped butter.
+  **ALLERGENS:** Gluten, Eggs, Dairy (Butter)
+
+---
+
+- **ITEM:** Farmer's Breakfast
+  **PRICE:** $15.99
+  **DESCRIPTION:** Three eggs, bacon, sausage, ham, hash browns, and toast.
+  **ALLERGENS:** Eggs, Gluten (Toast), Pork (Bacon/Sausage/Ham)
+  **NOTES:** Heartiest breakfast option. Great for a big appetite.
+
+---
+
+### OMELETTES
+
+- **ITEM:** Cheese Omelette
+  **PRICE:** $13.99
+  **DESCRIPTION:** Three eggs, toast, loaded with melted cheddar cheese.
+  **ALLERGENS:** Eggs, Dairy (Cheddar), Gluten (Toast)
+
+---
+
+- **ITEM:** Ham & Bacon Omelette
+  **PRICE:** $15.99
+  **DESCRIPTION:** Three eggs, toast, diced ham, crispy bacon, and cheddar cheese.
+  **ALLERGENS:** Eggs, Dairy (Cheddar), Gluten (Toast), Pork (Ham/Bacon)
+
+---
+
+- **ITEM:** All-Meat Omelette
+  **PRICE:** $16.99
+  **DESCRIPTION:** Ham, bacon, sausage, toast, and cheddar cheese.
+  **ALLERGENS:** Eggs, Dairy (Cheddar), Gluten (Toast), Pork (Ham/Bacon/Sausage)
+  **NOTES:** Most filling omelette option.
+
+---
+
+- **ITEM:** Greek Omelette
+  **PRICE:** $15.99
+  **DESCRIPTION:** Three eggs filled with feta cheese, tomatoes, onions, and spinach. Served with toast and hash browns.
+  **ALLERGENS:** Eggs, Dairy (Feta), Gluten (Toast)
+  **NOTES:** ✅ Vegetarian. Also available as a combo upgrade — see Combo #3.
+
+---
+
+### EGGS BENEDICT
+
+- **ITEM:** Classic Eggs Benedict
+  **PRONUNCIATION:** "Klas-ik Egz BEN-ih-dikt"
+  **PRICE:** $15.99
+  **DESCRIPTION:** Ham, poached eggs, hollandaise sauce, and hash browns.
+  **ALLERGENS:** Eggs, Gluten, Dairy (Hollandaise), Pork (Ham)
+  **NOTES:** Hollandaise = "Hol-un-dayz" — creamy egg-butter sauce.
+
+---
+
+- **ITEM:** Bacon Benedict
+  **PRICE:** $15.99
+  **DESCRIPTION:** Crispy bacon, poached eggs, hollandaise sauce, and hash browns.
+  **ALLERGENS:** Eggs, Gluten, Dairy (Hollandaise), Pork (Bacon)
+
+---
+
+- **ITEM:** Veggie Benedict
+  **PRICE:** $14.99
+  **DESCRIPTION:** Spinach and tomato, poached eggs, hollandaise sauce, and hash browns.
+  **ALLERGENS:** Eggs, Gluten, Dairy (Hollandaise)
+  **NOTES:** ✅ Vegetarian option in Eggs Benedict.
+
+---
+
+### PANCAKES & CREPES
+
+- **ITEM:** Plain Pancakes
+  **PRICE:** $11.99
+  **DESCRIPTION:** Three fluffy pancakes.
+  **ALLERGENS:** Gluten, Eggs, Dairy
+
+---
+
+- **ITEM:** Chocolate Chip Pancakes
+  **PRICE:** $13.99
+  **DESCRIPTION:** Three pancakes with chocolate chips inside.
+  **ALLERGENS:** Gluten, Eggs, Dairy
+
+---
+
+- **ITEM:** Chocolate Lava Pancakes
+  **PRICE:** $14.99
+  **DESCRIPTION:** Three pancakes filled with warm Nutella.
+  **ALLERGENS:** Gluten, Eggs, Dairy, Tree Nuts (Nutella — hazelnuts)
+
+---
+
+- **ITEM:** Fruit & Nutella Pancakes
+  **PRICE:** $15.99
+  **DESCRIPTION:** Pancakes with Nutella drizzle and your choice of fruit: Strawberry, Banana, or Mixed Berries.
+  **ALLERGENS:** Gluten, Eggs, Dairy, Tree Nuts (Nutella)
+  **NOTES:** Agent must ask: *"Which fruit — Strawberry, Banana, or Mixed Berries?"*
+
+---
+
+- **ITEM:** Banana Nut Pancakes
+  **PRICE:** $14.99
+  **DESCRIPTION:** Pancakes with banana slices inside and honey drizzle.
+  **ALLERGENS:** Gluten, Eggs, Dairy
+
+---
+
+- **ITEM:** Nutella Strawberry Crepes
+  **PRONUNCIATION:** "Noo-TEL-uh STRAW-beh-ree Kreps"
+  **PRICE:** $14.99
+  **DESCRIPTION:** Crepes topped with Nutella and fresh strawberries.
+  **ALLERGENS:** Gluten, Eggs, Dairy, Tree Nuts (Nutella)
+
+---
+
+- **ITEM:** Nutella Banana Crepes
+  **PRICE:** $13.99
+  **DESCRIPTION:** Crepes topped with Nutella and banana slices.
+  **ALLERGENS:** Gluten, Eggs, Dairy, Tree Nuts (Nutella)
+
+---
+
+- **ITEM:** Mixed Fruit Nutella Crepes
+  **PRICE:** $15.99
+  **DESCRIPTION:** Crepes topped with Nutella and mixed berries.
+  **ALLERGENS:** Gluten, Eggs, Dairy, Tree Nuts (Nutella)
+
+---
+
+### GREEK INSPIRED BREAKFAST
+
+- **ITEM:** Mediterranean Breakfast Plate
+  **PRICE:** $15.99
+  **DESCRIPTION:** Two eggs, grilled pita bread, feta cheese, olives, tomatoes, and cucumber.
+  **ALLERGENS:** Eggs, Dairy (Feta), Gluten (Pita)
+  **NOTES:** ✅ Good vegetarian option with a Greek flavour.
+
+---
+
+- **ITEM:** Spinach & Feta Breakfast Wrap
+  **PRICE:** $14.99
+  **DESCRIPTION:** Scrambled eggs, spinach, feta, and tomatoes wrapped in a warm tortilla. Served with hash browns.
+  **ALLERGENS:** Eggs, Dairy (Feta), Gluten (Tortilla)
+  **NOTES:** ✅ Vegetarian.
+
+---
+
+- **ITEM:** Greek Yogurt Bowl
+  **PRICE:** $11.99
+  **DESCRIPTION:** Thick Greek yogurt topped with honey, granola, and fresh berries.
+  **ALLERGENS:** Dairy (Yogurt), Gluten (Granola)
+  **NOTES:** ✅ Vegetarian. Lightest Greek-inspired option.
+
+---
+
+### LIGHT AND HEALTHY
+
+- **ITEM:** Avocado Toast
+  **PRICE:** $12.99
+  **DESCRIPTION:** Smashed avocado on sourdough with cherry tomatoes and feta.
+  **ALLERGENS:** Gluten (Sourdough), Dairy (Feta)
+  **NOTES:** ✅ Vegetarian.
+
+---
+
+- **ITEM:** Oatmeal Bowl
+  **PRICE:** $9.99
+  **DESCRIPTION:** Warm oatmeal topped with brown sugar and fresh fruit.
+  **ALLERGENS:** Gluten (Oats — verify cross-contamination)
+  **NOTES:** ✅ Vegan-friendly. Budget-friendly breakfast.
+
+---
+
+- **ITEM:** Fresh Fruit Plate
+  **PRICE:** $9.99
+  **DESCRIPTION:** A refreshing mix of seasonal fresh fruits, sliced and ready to enjoy.
+  **ALLERGENS:** None
+  **NOTES:** ✅ Vegan. Lightest and most allergy-friendly option on the breakfast menu.
+
+---
+
+### BREAKFAST COMBOS
+
+> Combos are the best value breakfast options. Always mention combos if the caller seems to be ordering multiple breakfast items individually.
+
+- **ITEM:** Combo #1 — Classic
+  **PRICE:** $12.99
+  **DESCRIPTION:** 2 eggs, hash browns, toast, and choice of bacon or sausage.
+  **ALLERGENS:** Eggs, Gluten (Toast), Pork
+
+---
+
+- **ITEM:** Combo #2 — Pancake Combo
+  **PRICE:** $14.99
+  **DESCRIPTION:** 2 pancakes, 2 eggs, and choice of bacon or sausage.
+  **ALLERGENS:** Gluten, Eggs, Dairy, Pork
+
+---
+
+- **ITEM:** Combo #3 — Omelette Combo
+  **PRICE:** $15.99
+  **DESCRIPTION:** Cheese omelette, hash browns, and toast.
+  **ALLERGENS:** Eggs, Dairy (Cheddar), Gluten
+  **NOTES:** Upgrade to Greek Omelette (feta, tomato, spinach) for +$2. Always mention this upgrade.
+
+---
+
+- **ITEM:** Combo #4 — Mediterranean Combo
+  **PRICE:** $14.99
+  **DESCRIPTION:** 2 eggs, grilled pita, feta, tomato, and cucumber.
+  **ALLERGENS:** Eggs, Dairy (Feta), Gluten (Pita)
+  **NOTES:** ✅ Vegetarian combo option.
+
+---
+
 ## 🥗 VEGETARIAN & VEGAN OPTIONS IN THIS KB
 
+**Starters:**
 - ✅ Roasted Brussels Sprouts (Vegan)
 - ✅ Roasted Broccoli (Vegetarian)
 - ✅ Bruschetta (Vegetarian)
@@ -280,6 +540,17 @@
 - ✅ Fennel Salad (Vegetarian — check hazelnuts)
 - ✅ Chef's Salad (Vegetarian)
 
+**Breakfast:**
+- ✅ Greek Omelette (Vegetarian)
+- ✅ Veggie Benedict (Vegetarian)
+- ✅ Mediterranean Breakfast Plate (Vegetarian)
+- ✅ Spinach & Feta Breakfast Wrap (Vegetarian)
+- ✅ Greek Yogurt Bowl (Vegetarian)
+- ✅ Avocado Toast (Vegetarian)
+- ✅ Oatmeal Bowl (Vegan-friendly)
+- ✅ Fresh Fruit Plate (Vegan)
+- ✅ Combo #4 — Mediterranean Combo (Vegetarian)
+
 ---
 
-*End of KB 1 — The Greek Grill AB | GG_KB1_Starters_And_Snacks*
+*End of KB 1 — The Greek Grill AB | GG_KB1_Starters_Snacks_Breakfast*

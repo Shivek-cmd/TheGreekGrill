@@ -8,11 +8,11 @@
 
 ---
 
-**KB 1 — GG_KB1_Starters_And_Snacks**
+**KB 1 — GG_KB1_Starters_Snacks_Breakfast**
 ```
-Use this KB when the caller asks about starters, appetizers, soups, salads, or light bites. Always verify item names, prices, and allergens against this KB before confirming.
+Use this KB when the caller asks about starters, appetizers, soups, salads, light bites, or any breakfast item. Always verify item names, prices, and allergens against this KB before confirming.
 ```
-*(174 characters)*
+*(196 characters)*
 
 ---
 

@@ -88,6 +88,9 @@ Tzatziki, Souvlaki, Skepasti, Calamari, Arancini, Bruschetta, Focaccia,
 Rack of Lamb, Butter Chicken, Blackened Salmon, Wagyu, Karaage, Piccata,
 Carbonara, Bolognese, Risotto, Provencal, Chimichurri, Szechuan,
 Margherita, Pinocchio, Cappuccino, Espresso, Latte, Clamato,
+Eggs Benedict, Hollandaise, Omelette, Greek Omelette, French Toast,
+Buttermilk Pancakes, Avocado Toast, Farmer's Breakfast, Nutella,
+Mediterranean, Sourdough, Granola, hash browns, breakfast combo,
 Greek Grill, Sofia, mild, medium, spicy, takeout, reservation, dine-in
 ```
 
@@ -126,6 +129,7 @@ Add each entry as a separate word + pronunciation pair:
 | Zucchini | zoo-kee-nee |
 | Truffle | truf-ul |
 | Fennel | fen-ul |
+| Hollandaise | hol-un-dayz |
 | Feta | fee-tuh |
 
 ---
