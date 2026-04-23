@@ -80,15 +80,16 @@ const items = itemsRaw
     const name     = parts[1];
     const price    = parts[2];
     const notes    = parts.slice(3).join(':');
+    const parsedPrice = parseFloat(price);
     return {
       name:     (name     || '').trim(),
       quantity: parseInt(quantity)   || 1,
-      price:    parseFloat(price)    || 0,
+      price:    isNaN(parsedPrice) || parsedPrice === 0 ? null : parsedPrice,
       notes:    (notes    || '').trim()
     };
   });
 
-const totalPrice = items.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+const totalPrice = items.reduce((sum, i) => sum + ((i.price || 0) * i.quantity), 0);
 
 return [{
   json: {
