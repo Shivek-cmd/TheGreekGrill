@@ -69,6 +69,21 @@ Receives the raw webhook, parses `items_summary`, calculates `totalPrice`.
 const raw = $input.first();
 const input = raw.json.query;
 
+function normalizePhone(raw) {
+  if (!raw) return null;
+  const wordMap = {
+    'zero':'0','one':'1','two':'2','three':'3','four':'4',
+    'five':'5','six':'6','seven':'7','eight':'8','nine':'9'
+  };
+  let n = raw.toLowerCase()
+    .replace(/\b(zero|one|two|three|four|five|six|seven|eight|nine)\b/g, m => wordMap[m])
+    .replace(/[^\d+]/g, '');
+  if (n.startsWith('+')) return n;          // already has country code — leave as-is
+  if (/^\d{10}$/.test(n)) return '+1' + n;  // 10 digits → North American
+  if (/^\d{11,}$/.test(n)) return '+' + n;  // 11+ digits → has country code, just missing +
+  return n || raw;
+}
+
 const itemsRaw = input.items_summary || '';
 const items = itemsRaw
   .split(/\\\||\|/)
@@ -104,8 +119,8 @@ return [{
       totalPrice:      parseFloat(totalPrice.toFixed(2))
     },
     customer: {
-      name:  input.customer_name  || null,
-      phone: input.customer_phone || null
+      name:  input.customer_name              || null,
+      phone: normalizePhone(input.customer_phone)
     },
     restaurant: {
       name:       input.restaurant_name    || null,

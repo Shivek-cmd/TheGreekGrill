@@ -102,7 +102,7 @@
 
 - **ITEM:** Greek Carbonara
   **PRONUNCIATION:** "Greek Kar-buh-NAR-uh"
-  **PRICE:** Confirm with staff
+  **PRICE:** $18.95
   **DESCRIPTION:** Pasta with bacon, egg, cream, cheese, and herbs.
   **ALLERGENS:** Gluten (Pasta), Dairy (Cream, Cheese), Eggs, Pork (Bacon)
   **NOTES:** Carbonara = "Kar-buh-NAR-uh" — a Roman-style creamy pasta. This version has a Greek twist.
