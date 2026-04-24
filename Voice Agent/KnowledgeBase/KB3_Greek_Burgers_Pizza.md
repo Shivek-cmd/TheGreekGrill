@@ -168,7 +168,7 @@
 
 - **ITEM:** Margherita Pizza
   **PRONUNCIATION:** "Mar-geh-REE-tuh PEET-suh"
-  **PRICE:** $17.95
+  **PRICE:** $15.95
   **DESCRIPTION:** Crushed San Marzano tomatoes, fresh mozzarella cheese, and fresh basil.
   **ALLERGENS:** Gluten (Dough), Dairy (Mozzarella)
   **NOTES:** Classic Italian pizza. San Marzano = premium Italian tomato variety. ✅ Vegetarian.

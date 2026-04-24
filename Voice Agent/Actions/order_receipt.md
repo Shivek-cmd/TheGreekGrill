@@ -24,6 +24,29 @@ Node 5 — PrintNode          (sends PDF to printer)
 https://n8n.bizbull.ai/webhook/4dcea672-3074-4914-80fb-57e7cbbec2fe
 ```
 
+**Action Name:**
+```
+finalize_order
+```
+
+**When should the Custom API action take place?** *(0/500 char limit)*
+```
+When the caller has confirmed the full order recap and said they are done — all items, order type, ready time, name, and phone are confirmed and the agent is ready to submit the order.
+```
+
+**What to say before performing the action** *(0/500 char limit)*
+```
+Give me just a second while I get that sorted for you...
+```
+
+**Run in background:** `OFF`
+> Must be OFF — the receipt must be sent and printed before the call ends.
+
+**Retry on failure:** `ON`
+
+**API Timeout (sec):** `15`
+> 15 seconds allows time for PDF generation and PrintNode submission.
+
 ---
 
 ## Step 2 — Parameters (Sent as Query)

@@ -92,7 +92,7 @@
 
 - **ITEM:** Dry Garlic Ribs (8oz)
   **PRONUNCIATION:** "Dry GAR-lik Ribz — Eight Ounce"
-  **PRICE:** $16.95
+  **PRICE:** $12.95
   **DESCRIPTION:** 8 oz of dry-rub garlic ribs served with honey mustard dipping sauce.
   **ALLERGENS:** Pork, possible Gluten (dry rub seasoning — verify with kitchen)
   **NOTES:** 8oz = approximately 225 grams. A hearty, flavourful pork appetizer.
@@ -101,7 +101,7 @@
 
 - **ITEM:** Greek Bombs
   **PRONUNCIATION:** "Greek Bomz"
-  **PRICE:** $12.95
+  **PRICE:** $16.95
   **DESCRIPTION:** Stuffed jalapeño poppers filled with cream cheese, jalapeños, and chicken, served with marinara dipping sauce.
   **ALLERGENS:** Dairy (Cream Cheese), Gluten (coating), possible Spice
   **NOTES:** ⚠️ SPICY — warn customers who are sensitive to heat.
@@ -126,10 +126,11 @@
 
 ---
 
-- **ITEM:** Roasted Brussels Sprouts
-  **PRONUNCIATION:** "ROH-sted BRUSS-ulz Sprouts"
+- **ITEM:** Roasted Brussels
+  **PRONUNCIATION:** "ROH-sted BRUSS-ulz"
   **PRICE:** $9.95
-  **DESCRIPTION:** Brussels sprouts roasted with olive oil, garlic, salt, and pepper.
+  **DESCRIPTION:** roasted with olive oil, garlic, salt &
+  pepper.
   **ALLERGENS:** None (Vegan)
   **NOTES:** ✅ Great vegan option.
 

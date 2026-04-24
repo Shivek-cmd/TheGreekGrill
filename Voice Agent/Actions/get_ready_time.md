@@ -102,71 +102,77 @@ Node 3 — Respond to Webhook  (sends JSON back to GHL)
 ## Step 5 — n8n Code Node (JavaScript)
 
 ```javascript
-// Restaurant hours: 12:00 PM (open) to 2:00 AM (close)
-// Returns minimum_time: earliest pickup = now + 30 min, rounded up to next :00 or :30
+// Restaurant hours:
+// Mon–Thu: 9:00 AM – 10:00 PM  (OPEN_TIME=540, CLOSE_TIME=1320)
+// Fri–Sun: 9:00 AM – 12:00 AM  (OPEN_TIME=540, CLOSE_TIME=1440)
+// Returns minimum_time: earliest pickup = now + 30 min, rounded to next :00 or :30
 
-const now = new Date();
+  const now = new Date();
 
-// Get current Edmonton time in minutes since midnight
-const parts = new Intl.DateTimeFormat('en-CA', {
-  timeZone: 'America/Edmonton',
-  hour:   'numeric',
-  minute: '2-digit',
-  hour12: false
-}).formatToParts(now);
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/Edmonton',
+    weekday: 'long',
+    hour:    'numeric',
+    minute:  '2-digit',
+    hour12:  false
+  }).formatToParts(now);
 
-const currentHour   = parseInt(parts.find(p => p.type === 'hour').value);
-const currentMinute = parseInt(parts.find(p => p.type === 'minute').value);
-const currentTotal  = currentHour * 60 + currentMinute;
+  const dayOfWeek    = parts.find(p => p.type === 'weekday').value;
+  const currentHour  = parseInt(parts.find(p => p.type === 'hour').value);
+  const currentMinute = parseInt(parts.find(p => p.type === 'minute').value);
+  const currentTotal = currentHour * 60 + currentMinute;
 
-function roundUpToSlot(minutes) {
-  const remainder = minutes % 30;
-  return remainder === 0 ? minutes : minutes + (30 - remainder);
-}
+  const OPEN_TIME  = 540;  // 9:00 AM every day
+  const CLOSE_TIME = ['Friday', 'Saturday', 'Sunday'].includes(dayOfWeek) ? 1440 : 1320;
+  // Fri/Sat/Sun → midnight (1440 = end of day) | Mon–Thu → 10:00 PM (1320)
 
-function minutesToTime(minutes) {
-  const m = ((minutes % 1440) + 1440) % 1440;
-  const h = Math.floor(m / 60);
-  const min = m % 60;
-  const period = h >= 12 ? 'PM' : 'AM';
-  const display = h === 0 ? 12 : h > 12 ? h - 12 : h;
-  return `${display}:${min.toString().padStart(2, '0')} ${period}`;
-}
+  const DEFAULT_OPEN_SLOT = 570; // 9:30 AM — first ready slot after opening
 
-function isOpen(minutes) {
-  const m = ((minutes % 1440) + 1440) % 1440;
-  return (m >= 720 && m <= 1439) || (m >= 0 && m < 120);
-}
+  function roundUpToSlot(minutes) {
+    const remainder = minutes % 30;
+    return remainder === 0 ? minutes : minutes + (30 - remainder);
+  }
 
-const DEFAULT_OPEN_TIME = 750; // 12:30 PM — first valid slot when restaurant opens
+  function minutesToTime(minutes) {
+    const m = ((minutes % 1440) + 1440) % 1440;
+    const h = Math.floor(m / 60);
+    const min = m % 60;
+    const period = h >= 12 ? 'PM' : 'AM';
+    const display = h === 0 ? 12 : h > 12 ? h - 12 : h;
+    return `${display}:${min.toString().padStart(2, '0')} ${period}`;
+  }
 
-let minimumRaw;
-let status;
+  const isCurrentlyOpen = currentTotal >= OPEN_TIME && currentTotal < CLOSE_TIME;
 
-const isClosed = currentTotal >= 120 && currentTotal < 720;
+  let minimumRaw;
+  let status;
+  let is_open;
 
-if (isClosed) {
-  // Restaurant not yet open — minimum is 12:30 PM (first slot after opening)
-  minimumRaw = DEFAULT_OPEN_TIME;
-  status = currentTotal < 720 ? 'before_opening' : 'after_closing';
-} else {
-  const earliest = roundUpToSlot(currentTotal + 30);
-  if (isOpen(earliest)) {
-    minimumRaw = earliest;
-    status = 'open';
+  if (!isCurrentlyOpen) {
+    minimumRaw = DEFAULT_OPEN_SLOT;
+    is_open    = false;
+    status     = currentTotal < OPEN_TIME ? 'before_opening' : 'after_closing';
   } else {
-    // Near closing — no valid slot before 2:00 AM, push to next opening
-    minimumRaw = DEFAULT_OPEN_TIME;
-    status = 'near_closing';
+    const earliest = roundUpToSlot(currentTotal + 30);
+    if (earliest < CLOSE_TIME) {
+      minimumRaw = earliest;
+      is_open    = true;
+      status     = 'open';
+    } else {
+      // Near closing — no valid slot before close, push to next opening
+      minimumRaw = DEFAULT_OPEN_SLOT;
+      is_open    = false;
+      status     = 'near_closing';
+    }
   }
-}
 
-return [{
-  json: {
-    status,
-    minimum_time: minutesToTime(minimumRaw)
-  }
-}];
+  return [{
+    json: {
+      status,
+      is_open,
+      minimum_time: minutesToTime(minimumRaw)
+    }
+  }];
 ```
 
 ---
@@ -174,44 +180,54 @@ return [{
 ## Step 6 — n8n Output
 
 ```json
-{
-  "status": "open",
-  "minimum_time": "2:00 PM"
-}
+// Restaurant is open:
+{ "status": "open", "is_open": true, "minimum_time": "10:30 AM" }
+
+// Restaurant is closed:
+{ "status": "after_closing", "is_open": false, "minimum_time": "9:30 AM" }
 ```
 
 **Status values:**
 
-| Status | Meaning | minimum_time returned |
-|--------|---------|----------------------|
-| `open` | Restaurant is open, calculated from now | now + 30 min, rounded to next :00 or :30 |
-| `before_opening` | Call before 12:00 PM | 12:30 PM |
-| `after_closing` | Call after 2:00 AM | 12:30 PM |
-| `near_closing` | Open but no valid slot before 2:00 AM | 12:30 PM |
+| Status | is_open | Meaning | minimum_time |
+|--------|---------|---------|--------------|
+| `open` | true | Restaurant is open, calculated from now | now + 30 min, rounded to next :00 or :30 |
+| `before_opening` | false | Called before 9:00 AM | 9:30 AM |
+| `after_closing` | false | Called after closing time | 9:30 AM (next opening) |
+| `near_closing` | false | Open but no valid slot before closing | 9:30 AM (next opening) |
 
 ---
 
 ## Step 7 — How Sofia Uses the Response
 
-In GHL, map the action response variable:
-- `minimum_time` → variable Sofia references as the earliest ready time
+In GHL, map these response variables:
+- `is_open` → Sofia checks this first to decide what to say
+- `minimum_time` → earliest ready time (used in both open and closed scenarios)
 
-Sofia says (STEP 7 of order flow):
+**When `is_open` is true:**
 > "The earliest we can have that ready is [minimum_time] — what time works for you?"
 
-The caller's answer (e.g., "2:30 PM", "in an hour", "as soon as possible") becomes `requested_time`.
-If the caller asks for a time earlier than `minimum_time`, Sofia says: "The earliest we can do is [minimum_time] — does that work?"
+Caller's answer becomes `requested_time`. If they ask for an earlier time: "The earliest we can do is [minimum_time] — does that work?"
+
+**When `is_open` is false:**
+- `before_opening`: "We're not open just yet — we open at 9 AM. I can take your order now and have it ready from [minimum_time] — want to do that?"
+- `after_closing` / `near_closing`: "We're actually closed for tonight — we open again tomorrow at 9 AM. I can take your order now for pickup or delivery tomorrow from [minimum_time] — want to do that?"
+- If caller says yes → continue, `requested_time` = [minimum_time]
+- If caller says no → "No problem at all — give us a call when you're ready. Have a great night!" and end the call
+- Dine-in is not available when closed — if caller wants dine-in, explain and offer takeout/delivery for next opening instead
 
 ---
 
 ## Example Scenarios
 
-| Edmonton Time | Status | minimum_time |
-|---------------|--------|--------------|
-| 11:35 AM | `before_opening` | 12:30 PM |
-| 1:45 PM | `open` | 2:30 PM |
-| 1:15 AM | `near_closing` | 12:30 PM (next opening) |
-| 2:30 AM | `after_closing` | 12:30 PM |
+| Day | Edmonton Time | Status | is_open | minimum_time |
+|-----|---------------|--------|---------|--------------|
+| Monday | 8:45 AM | `before_opening` | false | 9:30 AM |
+| Monday | 10:30 AM | `open` | true | 11:00 AM |
+| Monday | 9:35 PM | `near_closing` | false | 9:30 AM (tomorrow) |
+| Monday | 10:30 PM | `after_closing` | false | 9:30 AM (tomorrow) |
+| Friday | 11:45 PM | `near_closing` | false | 9:30 AM (tomorrow) |
+| Saturday | 2:00 PM | `open` | true | 2:30 PM |
 
 ---
 

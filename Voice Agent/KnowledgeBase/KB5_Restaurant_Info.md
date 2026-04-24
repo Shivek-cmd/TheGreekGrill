@@ -19,7 +19,8 @@
 |---|---|
 | **Restaurant Name** | The Greek Grill AB |
 | **Cuisine** | Greek Fusion / International |
-| **Hours** | 12:00 PM – 2:00 AM |
+| **Hours (Mon–Thu)** | 9:00 AM – 10:00 PM |
+| **Hours (Fri–Sun)** | 9:00 AM – 12:00 AM (midnight) |
 | **Days Open** | 7 Days a Week (including holidays) |
 | **Dine-in** | Yes |
 | **Takeout** | Yes (confirm with staff) |
@@ -45,13 +46,13 @@ A: *"Most dishes are not spicy. However, items like Greek Bombs, Cajun Basa, Bla
 A: *"Yes! Meat can be added to the Greek Salad and Warm Italian Salad for an extra charge. Please ask your server for details."*
 
 **Q: What time do you close?**
-A: *"We are open until 2:00 AM every day of the week."*
+A: *"Monday to Thursday we close at 10 PM, and Friday through Sunday we're open until midnight."*
 
 **Q: What time do you open?**
-A: *"We open at 12:00 PM (noon) every day."*
+A: *"We open at 9 AM every day."*
 
 **Q: Are you open on holidays?**
-A: *"Yes, we are open 7 days a week including holidays, from 12:00 PM to 2:00 AM."*
+A: *"Yes, we're open 7 days a week including holidays — 9 AM to 10 PM on weekdays and 9 AM to midnight on weekends."*
 
 **Q: Do you have a kids menu?**
 A: *"I don't have specific kids menu details — I'd recommend asking your server when you arrive."*
