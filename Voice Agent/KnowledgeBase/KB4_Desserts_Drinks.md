@@ -107,12 +107,13 @@
 ---
 
 ## 🥛 SECTION 4 — MILKSHAKES
+> Also called "shakes". "Strawberry shake" = Strawberry Milkshake. "[Flavor] shake" = [Flavor] Milkshake.
 
-| Item | Pronunciation | Price |
-|---|---|---|
-| Strawberry Milkshake | "STRAW-beh-ree MILK-shayk" | $7.25 |
-| Chocolate Milkshake | "CHOK-lit MILK-shayk" | $7.25 |
-| Vanilla Milkshake | "Vuh-NIL-uh MILK-shayk" | $7.25 |
+| Item | Pronunciation | Price | Also Known As |
+|---|---|---|---|
+| Strawberry Milkshake | "STRAW-beh-ree MILK-shayk" | $7.25 | strawberry shake, strawberry milk |
+| Chocolate Milkshake | "CHOK-lit MILK-shayk" | $7.25 | chocolate shake, choco shake |
+| Vanilla Milkshake | "Vuh-NIL-uh MILK-shayk" | $7.25 | vanilla shake |
 
 ---
 
