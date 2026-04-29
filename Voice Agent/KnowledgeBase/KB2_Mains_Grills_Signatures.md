@@ -93,7 +93,7 @@
 
 - **ITEM:** Spaghetti Bolognese
   **PRONUNCIATION:** "Spuh-GET-ee Boh-loh-NYEH-zeh"
-  **PRICE:** $18.95
+  **PRICE:** $17.95
   **DESCRIPTION:** Spaghetti pasta topped with house-made meat sauce and parmesan cheese.
   **ALLERGENS:** Gluten (Pasta), Dairy (Parmesan)
   **NOTES:** Bolognese = classic Italian meat sauce. One of the most popular pasta dishes worldwide.
@@ -230,8 +230,8 @@
 
 ---
 
-- **ITEM:** Fresh B.C. Chinook Salmon with Thai Curry Sauce
-  **PRONUNCIATION:** "Fresh Bee-See CHIH-nook SAM-un with Tie KARE-ee Sawss"
+- **ITEM:** Fresh B.C. Chinook Salmon
+  **PRONUNCIATION:** "Fresh Bee-See CHIH-nook SAM-un"
   **PRICE:** $32.95
   **DESCRIPTION:** Fresh British Columbia Chinook salmon with Thai curry sauce, fragrant rice, and vegetables.
   **ALLERGENS:** Fish (Salmon), possible Shellfish (curry paste — verify), possible Dairy

@@ -89,83 +89,90 @@ Multiple items separated by `\|`:
 Receives the raw webhook, parses `items_summary`, calculates `totalPrice`.
 
 ```javascript
-const raw = $input.first();
-const input = raw.json.query;
+const data = $input.first().json;
+const { order, customer, restaurant } = data;
 
-function normalizePhone(raw) {
-  if (!raw) return null;
-  const wordMap = {
-    'zero':'0','one':'1','two':'2','three':'3','four':'4',
-    'five':'5','six':'6','seven':'7','eight':'8','nine':'9'
-  };
-  let n = raw.toLowerCase()
-    .replace(/\b(zero|one|two|three|four|five|six|seven|eight|nine)\b/g, m => wordMap[m])
-    .replace(/[^\d+]/g, '');
-  if (n.startsWith('+')) return n;          // already has country code — leave as-is
-  if (/^\d{10}$/.test(n)) return '+1' + n;  // 10 digits → North American
-  if (/^\d{11,}$/.test(n)) return '+' + n;  // 11+ digits → has country code, just missing +
-  return n || raw;
-}
+// Generate Edmonton local date (GHL cannot extract this from the conversation)
+const now = new Date();
+const parts = new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'America/Edmonton',
+  year: 'numeric', month: '2-digit', day: '2-digit',
+  hour: '2-digit', minute: '2-digit', hour12: true
+}).formatToParts(now);
+const get = (type) => parts.find(p => p.type === type)?.value || '';
+const orderDateLocal = `${get('year')}-${get('month')}-${get('day')}`;
+const orderTimeLocal = `${get('hour')}:${get('minute')} ${get('dayPeriod')}`;
 
-const itemsRaw = input.items_summary || '';
-const items = itemsRaw
-  .split(/\\\||\|/)
-  .map(s => s.trim())
-  .filter(s => s !== '')
-  .map(s => {
-    const parts = s.split(':');
-    const quantity = parts[0];
-    const name     = parts[1];
-    const price    = parts[2];
-    const notes    = parts.slice(3).join(':');
-    const parsedPrice = parseFloat(price);
-    return {
-      name:     (name     || '').trim(),
-      quantity: parseInt(quantity)   || 1,
-      price:    isNaN(parsedPrice) || parsedPrice === 0 ? null : parsedPrice,
-      notes:    (notes    || '').trim()
-    };
-  });
-
-const totalPrice = items.reduce((sum, i) => sum + ((i.price || 0) * i.quantity), 0);
+// Generate order ID from timestamp
+const orderId = Date.now();
 
 return [{
   json: {
-    order: {
-      items,
-      orderType:       input.order_type       || null,
-      deliveryAddress: input.delivery_address || null,
-      buzzerCode:      input.buzzer_code      || null,
-      allergies:       input.special_requests  || null,
-      requestedTime:   input.requested_time   || null,
-      // orderDateLocal and orderTimeLocal are NOT read from GHL — generated in Node 3
-      totalPrice:      parseFloat(totalPrice.toFixed(2))
+    ordercontent: {
+      restaurant_name:    restaurant.name,
+      restaurant_address: restaurant.address,
+      restaurant_email:   null,
+      customer: {
+        Name:     customer.name,
+        Phone:    customer.phone,
+        timezone: 'America/Edmonton',
+        Email:    null
+      },
+      order: {
+        Type:                order.orderType,
+        items:               order.items,
+        specialInstructions: order.allergies        || null,
+        orderDateLocal,
+        orderTimeLocal,
+        fulfillmentTimeLocal: order.requestedTime
+      },
+      id: String(orderId)
     },
-    customer: {
-      name:  input.customer_name              || null,
-      phone: normalizePhone(input.customer_phone)
-    },
-    restaurant: {
-      name:       input.restaurant_name    || null,
-      locationId: input.restaurant_name    || null,
-      address:    input.restaurant_address || null
-    }
+    order_id: orderId
   }
 }];
 ```
 
 **Output from Node 2:**
 ```json
-{
-  "order": {
-    "items": [...],
-    "orderType": "pickup",
-    "requestedTime": "1:00 PM",
-    "totalPrice": 30.93
-  },
-  "customer": { "name": "Jessica", "phone": "+91 94137 52688" },
-  "restaurant": { "name": "The Greek Grill", "address": "#31 99 Wye Rd, Sherwood Park, AB T8B 1M1" }
-}
+[
+  {
+    "ordercontent": {
+      "restaurant_name": "The Greek Grill",
+      "restaurant_address": "#31 99 Wye Rd, Sherwood Park, AB T8B 1M1",
+      "restaurant_email": null,
+      "customer": {
+        "Name": "Szechuan, s h I v e k",
+        "Phone": "+919413752688",
+        "timezone": "America/Edmonton",
+        "Email": null
+      },
+      "order": {
+        "Type": "pickup",
+        "items": [
+          {
+            "name": "Margherita Pizza",
+            "quantity": 2,
+            "price": 17.95,
+            "notes": "none"
+          },
+          {
+            "name": "Sprite",
+            "quantity": 3,
+            "price": 2.75,
+            "notes": "none"
+          }
+        ],
+        "specialInstructions": null,
+        "orderDateLocal": "2026-04-29",
+        "orderTimeLocal": "07:55 a.m.",
+        "fulfillmentTimeLocal": "9:30 AM"
+      },
+      "id": "1777470908216"
+    },
+    "order_id": 1777470908216
+  }
+]
 ```
 
 ---
@@ -221,33 +228,44 @@ return [{
 
 **Output from Node 3 — matches exactly what Slip PDF Processor expects:**
 ```json
-{
-  "ordercontent": {
-    "restaurant_name": "The Greek Grill",
-    "restaurant_address": "#31 99 Wye Rd, Sherwood Park, AB T8B 1M1",
-    "restaurant_email": null,
-    "customer": {
-      "Name": "Jessica",
-      "Phone": "+91 94137 52688",
-      "timezone": "America/Edmonton",
-      "Email": null
+[
+  {
+    "ordercontent": {
+      "restaurant_name": "The Greek Grill",
+      "restaurant_address": "#31 99 Wye Rd, Sherwood Park, AB T8B 1M1",
+      "restaurant_email": null,
+      "customer": {
+        "Name": "Szechuan, s h I v e k",
+        "Phone": "+919413752688",
+        "timezone": "America/Edmonton",
+        "Email": null
+      },
+      "order": {
+        "Type": "pickup",
+        "items": [
+          {
+            "name": "Margherita Pizza",
+            "quantity": 2,
+            "price": 17.95,
+            "notes": "none"
+          },
+          {
+            "name": "Sprite",
+            "quantity": 3,
+            "price": 2.75,
+            "notes": "none"
+          }
+        ],
+        "specialInstructions": null,
+        "orderDateLocal": "2026-04-29",
+        "orderTimeLocal": "07:55 a.m.",
+        "fulfillmentTimeLocal": "9:30 AM"
+      },
+      "id": "1777470908216"
     },
-    "order": {
-      "Type": "pickup",
-      "items": [
-        { "name": "Cheese Omelette", "quantity": 1, "price": 13.99, "notes": "none" },
-        { "name": "Cappuccino",      "quantity": 1, "price": 4.95,  "notes": "none" },
-        { "name": "Plain Pancakes",  "quantity": 1, "price": 11.99, "notes": "none" }
-      ],
-      "specialInstructions": null,
-      "orderDateLocal": "2026-04-23",
-      "orderTimeLocal": "01:00 PM",
-      "fulfillmentTimeLocal": "1:00 PM"
-    },
-    "id": "1745123456789"
-  },
-  "order_id": 1745123456789
-}
+    "order_id": 1777470908216
+  }
+]
 ```
 
 ---
@@ -350,7 +368,7 @@ const response = await this.helpers.httpRequest({
   encoding: null
 });
 
-return [{ json: { id, url: response?.url || null } }];
+return [{ json: { id, url: response?.url || null, customer_phone: customer.Phone } }];
 ```
 
 ---
@@ -360,14 +378,47 @@ return [{ json: { id, url: response?.url || null } }];
 **URL:** `https://api.printnode.com/printjobs` (POST)
 **Body:**
 ```json
+
+[
+  {
+    "id": "1777470908216",
+    "url": "http://187.124.229.161:8000/uploads/pdf_1777470908.pdf",
+    "customer_phone": "+919413752688"
+  }
+]
+```
+
+---
+
+## Node 6 — HTTP Request: GHL Inbound Webhook
+
+**Purpose:** Pushes the receipt URL and customer phone to GHL. This triggers **WF-08** inside GHL, which finds the contact by phone number and writes the receipt URL to the `order_details` field.
+
+| Setting | Value |
+|---------|-------|
+| Method | `POST` |
+| URL | `https://services.leadconnectorhq.com/hooks/EXi2BTQg5OR7dUmjnc3N/webhook-trigger/4b0c4995-0497-4811-ada3-e10d8041d44b` |
+| Authentication | None |
+| Send Body | ON |
+| Body Content Type | `JSON` |
+
+**Body:**
+```json
 {
-  "printerId": 75369605,
-  "title": "Order Receipt - {{$json.id}}",
-  "contentType": "pdf_uri",
-  "content": "{{$json.url}}",
-  "source": "Printnode web 2.0"
+  "receipt_url": "{{ $json.url }}",
+  "order_id": "{{ $json.id }}",
+  "customer_phone": "{{ $json.customer_phone }}"
 }
 ```
+
+> All three values come from Node 4's output. No node references needed.
+
+**What GHL does after receiving this (WF-08):**
+1. Inbound Webhook trigger fires
+2. Find contact by `customer_phone`
+3. Update contact field `order_details` → `receipt_url`
+
+After WF-08 runs, `{{contact.order_details}}` is available in all GHL SMS and email templates as a clickable PDF receipt link.
 
 ---
 
