@@ -3,7 +3,7 @@
 
 ---
 
-**Trigger:** Tag added: `review-pending` (applied by WF-01 Step 9)
+**Trigger:** Tag added: `review-pending` (applied by WF-01 Step 12)
 **Purpose:** Capture positive reviews on Google; catch negative feedback privately before it goes public
 
 ---
@@ -11,14 +11,24 @@
 ## Main Flow
 
 ```
-[Tag: review-pending applied after order confirmed]
+[Tag: review-pending added by WF-01]
+    │
+    ▼
+GUARD — Check: Does contact have tag review-requested?
+   ├── YES → Remove tag: review-pending → EXIT immediately
+   │         (customer already received a review request — do not ask again)
+   └── NO  → continue
+
     │
     ▼
 Wait: 3 hours
 (enough time for customer to receive and eat their order)
     │
     ▼
-Apply tag: review-requested
+Apply tag: review-requested   ← permanent guard — prevents future re-sends
+    │
+    ▼
+Remove tag: review-pending    ← cleanup so WF-01 can re-add it next order and re-trigger WF-06
     │
     ▼
 Send SMS to Customer
@@ -37,9 +47,17 @@ Wait for reply (GHL keyword trigger — up to 24 hours)
     │
     ├── Reply: HAPPY ──→ WF-06a
     └── Reply: HELP  ──→ WF-06b
+
+No reply within 24 hours → EXIT silently
 ```
 
-> No reply within 24 hours → exit silently. Do not send a second request. The `review-requested` tag prevents re-sending.
+---
+
+## Why the Guard Matters
+
+GHL workflows trigger when a tag is **added**. If `review-pending` already exists on the contact (not removed from a previous run), WF-01 adding it again won't re-trigger WF-06. This is why WF-06 removes `review-pending` after use — so it can be re-added cleanly on the next order.
+
+The `review-requested` tag is the permanent "already asked" guard. Once a customer has received the review SMS, they will never receive it again — even across multiple future orders.
 
 ---
 
@@ -92,8 +110,9 @@ STEP 3 — Send SMS to Admin (immediate)
 
 ## Notes
 
-- **Why HAPPY/HELP instead of 1–5 rating?** Keyword replies are faster to send by SMS and trigger GHL automations natively — no extra configuration needed.
-- **`review-requested` tag** prevents the same customer from being asked twice, even across multiple orders.
+- **Why HAPPY/HELP?** Keyword replies are faster by SMS and trigger GHL automations natively.
+- **`review-requested` is permanent.** Once set, no future order will re-send the review request. This is intentional — one ask per customer lifetime.
+- **`review-pending` must be removed by WF-06**, not left on the contact. WF-pre removes it as a safety net only.
 
 ---
 

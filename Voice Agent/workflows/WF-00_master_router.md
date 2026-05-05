@@ -23,25 +23,32 @@ Check: Is {{contact.last_order_status}} empty or null?
    │         (hang-up, dead air, bot confusion — do nothing)
    └── NO  → continue to Step 2
 
-STEP 2 — Customer type (only runs if status is populated)
-Check: Did this contact exist before this call?
-   ├── New contact  → Apply tag: new-customer
-   └── Existing     → Apply tag: returning-customer
-
-STEP 3 — Route by outcome
+STEP 2 — Route by outcome
 Branch on {{contact.last_order_status}}:
-   ├── "Order Confirmed"    → Apply tag: order-confirmed    → WF-01
-   ├── "Reservation Booked" → Apply tag: reservation-booked → WF-02
-   ├── "Info Only"          → Apply tag: info-only          → WF-03
-   └── "Transferred"        → Apply tag: transferred        → WF-04
+   ├── "Order Confirmed"
+   │     Apply tag: order-confirmed
+   │     Add to Workflow: WF-01  ← direct enroll, no tag trigger on WF-01
+   │
+   ├── "Reservation Booked"
+   │     Apply tag: reservation-booked
+   │     Add to Workflow: WF-02
+   │
+   ├── "Info Only"
+   │     Apply tag: info-only
+   │     Add to Workflow: WF-03
+   │
+   └── "Transferred"
+         Apply tag: transferred
+         Add to Workflow: WF-04
 ```
 
 ---
 
 ## Rules
 
-- **Routing only** — never add SMS, emails, or opportunity creation here. If a new outcome is needed, add a new tag + a new workflow, and update Step 3 only.
+- **Routing only** — never add SMS, emails, or opportunity creation here. If a new outcome is needed, add a new tag + a new workflow, and update Step 2 only.
 - The guard in Step 1 is what stops hang-ups and bot confusion from creating phantom CRM entries.
+- New vs returning customer detection happens inside WF-01 using opportunity count — NOT here.
 - WF-05 and WF-06 are spawned from WF-01, not from here.
 - WF-07 (missed call) runs on its own separate trigger — completely independent of this workflow.
 - WF-08 (receipt webhook) is triggered by n8n directly — completely independent of this workflow.

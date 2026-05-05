@@ -38,13 +38,32 @@ https://services.leadconnectorhq.com/hooks/EXi2BTQg5OR7dUmjnc3N/webhook-trigger/
 ```
 STEP 1 — Inbound Webhook fires
    (n8n Node 6 POSTs after PDF is generated)
+   Payload: { receipt_url, order_id, customer_phone }
 
 STEP 2 — Find Contact
-   Lookup by: customer_phone (from webhook payload)
+   Lookup by: customer_phone → {{inboundWebhookRequest.customer_phone}}
 
 STEP 3 — Update Contact Field
    Field: order_details
-   Value: {{receipt_url}}   ← mapped from webhook payload
+   Value: {{inboundWebhookRequest.receipt_url}}
+
+STEP 4 — Find Opportunity  ← REQUIRED before Update Opportunity
+   Action:    Find Opportunity
+   Label:     Find Latest Order Opportunity
+   Retrieve:  Latest
+   Filters (AND):
+     - Pipeline = Restaurant Orders
+     - Status   = Open
+
+   ├── Opportunity Found  → continue to STEP 5
+   └── Opportunity Not Found → EXIT (receipt still saved on contact in Step 3)
+
+STEP 5 — Update Opportunity
+   Action:  Update Opportunity
+   Fields:
+     - Order_details: {{inboundWebhookRequest.receipt_url}}
+   Allow Move to Previous Stage: OFF
+   Allow Duplicate: OFF
 ```
 
 ---

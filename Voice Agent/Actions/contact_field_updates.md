@@ -15,7 +15,7 @@ Each field has one of two behaviours:
 
 ---
 
-## All 11 Contact Fields
+## All Contact Fields
 
 | # | Action Name | CRM Field | Timing | Behaviour | What Sofia Extracts | Example Values |
 |---|-------------|-----------|--------|-----------|---------------------|----------------|
@@ -31,6 +31,10 @@ Each field has one of two behaviours:
 | 10 | Save Last Call Date | `last_call_date` | After call | Replace | Today's date — the date this call took place | `2026-04-23` `2026-05-01` |
 | 11 | Save Last Call Time | `last_call_time` | After call | Replace | The local time this call took place (Edmonton timezone, 12-hour format) | `1:51 PM` `9:30 AM` |
 | 12 | Save Order Status | `last_order_status` | After call | Replace | Whether the caller placed an order, booked a reservation, asked for info only, or was transferred | `Order Confirmed` `Reservation Booked` `Info Only` `Transferred` |
+| 13 | — (GHL response mapping) | `last_receipt_url` | After call (n8n response) | Replace | Receipt PDF URL — returned by n8n Node 5, mapped via Finalize Order action response | `https://...` |
+| 14 | — (WF-08 inbound webhook) | `order_details` | After call (n8n Node 6 → WF-08) | Replace | Clickable PDF receipt URL — written by WF-08 after n8n fires. Used in all SMS templates as `{{contact.order_details}}` | `https://...` |
+| 15 | — (WF-01 Step 5) | `order_count` | After call (WF-01) | Increment | Lifetime order counter — incremented by 1 on every confirmed order. Never reset. Used to detect new-customer (=1) and VIP (≥5) | `1` `4` `7` |
+| 16 | — (WF-01 Step 7) | `delivery_count` | After call (WF-01, delivery orders only) | Increment | Lifetime delivery counter — incremented only when order_type = delivery. Never reset. Used to apply delivery-customer tag at count = 2 | `1` `2` `5` |
 
 ---
 
@@ -79,7 +83,7 @@ This is the GHL field instruction that tells the AI what to extract. Use these e
 | `preferred_language` | The language or mix of languages the caller used during the conversation. |
 | `last_call_date` | Today's date — the date this call took place, in YYYY-MM-DD format. |
 | `last_call_time` | The local time this call took place, in 12-hour format (America/Edmonton timezone). |
-| `last_order_status` | Whether the caller successfully placed an order, booked a reservation, only asked for information, or was transferred to a human during this call. |
+| `last_order_status` | Whether the caller successfully placed an order, booked a reservation, only asked for information, or was transferred to a human during this call. If the caller hung up, said nothing, or the call ended without any action being completed, leave this field empty. An empty value signals WF-00 to treat this as an incomplete call and skip all routing. |
 
 ---
 
